@@ -20,11 +20,12 @@ import org.bukkit.event.player.PlayerFishEvent;
 import com.github.aasmus.pvptoggle.PvPToggle;
 import com.github.aasmus.pvptoggle.utils.Chat;
 import com.github.aasmus.pvptoggle.utils.Util;
+import org.bukkit.event.EventPriority;
 
 
 public class PvP implements Listener {
 
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	//fired when an entity is hit
 	public void onHit(EntityDamageByEntityEvent event) {
 		for(String world : PvPToggle.blockedWorlds) {
@@ -98,7 +99,7 @@ public class PvP implements Listener {
 		}
 	}
 	
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	//fired when a player is shot with a flaming arrow
 	public void onFlameArrow(EntityCombustByEntityEvent event) {
 		for(String world : PvPToggle.blockedWorlds) {
@@ -126,7 +127,7 @@ public class PvP implements Listener {
 		}
 	}
 	
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	//fired when a splash potion is thrown
 	public void onPotionSplash(PotionSplashEvent event) {
 		for(String world : PvPToggle.blockedWorlds) {
@@ -159,7 +160,7 @@ public class PvP implements Listener {
 		}
 	}
 	
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	//fired when a lingering potion is thrown
 	public void onLingeringPotionSplash(LingeringPotionSplashEvent event) {
 		for(String world : PvPToggle.blockedWorlds) {
@@ -188,7 +189,7 @@ public class PvP implements Listener {
 		}
 	}
 	
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     //fired when lingering potion cloud is active
     public void onCloudEffects(AreaEffectCloudApplyEvent event) {
 		for(String world : PvPToggle.blockedWorlds) {
@@ -219,7 +220,7 @@ public class PvP implements Listener {
     	}
     }
     
-    @EventHandler(ignoreCancelled = true)
+    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     //fired when a player uses a fishing rod
     public void onPlayerFishing (PlayerFishEvent event) {
 		for(String world : PvPToggle.blockedWorlds) {
