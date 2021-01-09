@@ -41,8 +41,10 @@ public class PvP implements Listener {
 		if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
 			Player damager = (Player) event.getDamager(); //player who hit
 			Boolean damagerState = PvPToggle.instance.players.get(damager.getUniqueId());
+            if(damagerState == null) damagerState = false;
 			Player attacked = (Player) event.getEntity(); //player who was hit
 			Boolean attackedState = PvPToggle.instance.players.get(attacked.getUniqueId());
+            if(attackedState == null) attackedState = false;
 			if (damagerState) { 
 				event.setCancelled(true);
 				Chat.send(damager, "PVP_DISABLED");
