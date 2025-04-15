@@ -19,9 +19,9 @@ public class PlayerJoin implements Listener {
 					if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
 						Util.particleEffect(p.getPlayer());	
 					}
-//					if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//	    				Util.ChangeNametag(p.getPlayer(), "&c");
-//					}
+					if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+	    				Util.ChangeNametag(p.getPlayer(), "&c");
+					}
 				}	
 			} else {
 				PvPToggle.instance.dataUtils.addPlayer(p.getPlayer());
@@ -30,9 +30,9 @@ public class PlayerJoin implements Listener {
 					if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
 						Util.particleEffect(p.getPlayer());	
 					}
-//					if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//	    				Util.ChangeNametag(p.getPlayer(), "&c");
-//					}
+					if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+	    				Util.ChangeNametag(p.getPlayer(), "&c");
+					}
 				}
 			}
 		}
@@ -47,9 +47,9 @@ public class PlayerJoin implements Listener {
     			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
     				Util.particleEffect(p.getPlayer());	
     			}
-//    			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//    				Util.ChangeNametag(p.getPlayer(), "&c");
-//    			}
+    			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+    				Util.ChangeNametag(p.getPlayer(), "&c");
+    			}
     		}	
     	} else {
 			PvPToggle.instance.dataUtils.addPlayer(p.getPlayer());
@@ -58,9 +58,9 @@ public class PlayerJoin implements Listener {
 				if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
 					Util.particleEffect(p.getPlayer());	
 				}
-//				if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//    				Util.ChangeNametag(p.getPlayer(), "&c");
-//				}
+				if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+    				Util.ChangeNametag(p.getPlayer(), "&c");
+				}
 			}
 		}
 	}

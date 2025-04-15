@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import com.github.aasmus.pvptoggle.PvPToggle;
-//import com.nametagedit.plugin.NametagEdit;
+import com.nametagedit.plugin.NametagEdit;
 
 public class Util {
 	
@@ -80,15 +80,15 @@ public class Util {
 		}
 	}
 	
-//	public static void ChangeNametag(Player p, String color) {
-//		if(PvPToggle.instance.getServer().getPluginManager().isPluginEnabled("NametagEdit")) {
-//			if(color == "reset") {
-//				NametagEdit.getApi().clearNametag(p);
-//			} else {
-//				NametagEdit.getApi().setPrefix(p, color);
-//			}	
-//		}
-//	}
+	public static void ChangeNametag(Player p, String color) {
+		if(PvPToggle.instance.getServer().getPluginManager().isPluginEnabled("NametagEdit")) {
+			if(color == "reset") {
+				NametagEdit.getApi().clearNametag(p);
+			} else {
+				NametagEdit.getApi().setPrefix(p, color);
+			}	
+		}
+	}
 	
 	public static void particleEffect(Player p) {
 		new BukkitRunnable() {
@@ -107,7 +107,7 @@ public class Util {
 						double x = (radius * Math.sin(angle));
 						double z = (radius * Math.cos(angle));
 						angle += 0.251;
-						p.getWorld().spawnParticle(Particle.REDSTONE, location.getX()+x, location.getY(), location.getZ()+z, 0, 0, 1, 0, dustOptions);
+						p.getWorld().spawnParticle(Particle.DUST, location.getX()+x, location.getY(), location.getZ()+z, 0, 0, 1, 0, dustOptions);
 					}
 				}
 				

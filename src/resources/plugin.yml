@@ -2,8 +2,8 @@ main: com.github.aasmus.pvptoggle.PvPToggle
 softdepend: [PlaceholderAPI, NametagEdit]
 name: PvPToggle
 version: 1.7
-api-version: 1.13
-author: aasmus (with modifications by the Red Fusion Team)
+api-version: 1.21
+author: aasmus (with modifications by the Red Fusion Team) TigerClips1
 description: Plugin that allows players to toggle PvP state
 commands:
   pvp:

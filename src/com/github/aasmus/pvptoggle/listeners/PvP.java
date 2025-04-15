@@ -24,13 +24,10 @@ import org.bukkit.metadata.FixedMetadataValue;
 import com.github.aasmus.pvptoggle.PvPToggle;
 import com.github.aasmus.pvptoggle.utils.Chat;
 import com.github.aasmus.pvptoggle.utils.Util;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.entity.LingeringPotionSplashEvent;
-
 
 public class PvP implements Listener {
 
-	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+	@EventHandler(ignoreCancelled = true)
 	//fired when an entity is hit
 	public void onHit(EntityDamageByEntityEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getEntity().getWorld().getName())) {
@@ -41,10 +38,8 @@ public class PvP implements Listener {
 		if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
 			Player damager = (Player) event.getDamager(); //player who hit
 			Boolean damagerState = PvPToggle.instance.players.get(damager.getUniqueId());
-            if(damagerState == null) damagerState = false;
 			Player attacked = (Player) event.getEntity(); //player who was hit
 			Boolean attackedState = PvPToggle.instance.players.get(attacked.getUniqueId());
-            if(attackedState == null) attackedState = false;
 			if (damagerState) { 
 				event.setCancelled(true);
 				Chat.send(damager, "PVP_DISABLED");
@@ -116,7 +111,7 @@ public class PvP implements Listener {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+	@EventHandler(ignoreCancelled = true)
 	//fired when a player is shot with a flaming arrow
 	public void onFlameArrow(EntityCombustByEntityEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getEntity().getWorld().getName())) {
@@ -142,7 +137,7 @@ public class PvP implements Listener {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+	@EventHandler(ignoreCancelled = true)
 	//fired when a splash potion is thrown
 	public void onPotionSplash(PotionSplashEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getEntity().getWorld().getName())) {
@@ -183,36 +178,7 @@ public class PvP implements Listener {
 		}
 	}
 	
-	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
-	//fired when a lingering potion is thrown
-	public void onLingeringPotionSplash(LingeringPotionSplashEvent event) {
-		for(String world : PvPToggle.blockedWorlds) {
-			if(event.getEntity().getWorld().getName().equals(world)) {
-				return;
-			}
-		}
-		
-		if(event.getEntity().getShooter() instanceof Player) {
-			if(event.getHitEntity() instanceof Player) {
-	    		Player damager = (Player) event.getEntity().getShooter();
-	    		Boolean damagerState = PvPToggle.instance.players.get(damager.getUniqueId());
-	        	Player attacked = (Player) event.getHitEntity();
-	    		Boolean attackedState = PvPToggle.instance.players.get(attacked.getUniqueId());
-	    		if(damagerState) {
-	    			event.setCancelled(true);
-	    			Chat.send(damager, "PVP_DISABLED");
-	    		} else if(attackedState != null && attackedState) {
-	    			event.setCancelled(true);
-	    			Chat.send(damager, "PVP_DISABLED_OTHERS", attacked.getDisplayName());
-	    		} else {
-					Util.setCooldownTime(damager);
-					Util.setCooldownTime(attacked);
-				}
-			}
-		}
-	}
-	
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true)
     //fired when lingering potion cloud is active
     public void onCloudEffects(AreaEffectCloudApplyEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getEntity().getWorld().getName())) {
@@ -241,7 +207,7 @@ public class PvP implements Listener {
     	}
     }
     
-    @EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+    @EventHandler(ignoreCancelled = true)
     //fired when a player uses a fishing rod
     public void onPlayerFishing (PlayerFishEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getPlayer().getWorld().getName())) {

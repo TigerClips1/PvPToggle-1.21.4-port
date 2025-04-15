@@ -36,9 +36,9 @@ public class PvPCommand implements CommandExecutor {
                                     if (PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
                                         Util.particleEffect(other.getPlayer());
                                     }
-//                        			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                        				Util.ChangeNametag(other.getPlayer(), "&c");   	
-//                        			}
+                        			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                        				Util.ChangeNametag(other.getPlayer(), "&c");   	
+                        			}
                                 }
 							} else {
 							    if (Util.setPlayerState(other, true, console)) {
@@ -52,17 +52,17 @@ public class PvPCommand implements CommandExecutor {
                                 	if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
                                         Util.particleEffect(other.getPlayer());
                                 	}
-//                        			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                        				Util.ChangeNametag(other.getPlayer(), "&c");
-//                        			}
+                        			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                        				Util.ChangeNametag(other.getPlayer(), "&c");
+                        			}
                                 }
                             }
 						} else if(args[0].equalsIgnoreCase("off")) {
 						    if (Util.setPlayerState(other, true, console)) {
                                 Chat.send(other, "PVP_STATE_DISABLED");
-//                    			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                    				Util.ChangeNametag(other.getPlayer(), "reset");
-//                    			}
+                    			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                    				Util.ChangeNametag(other.getPlayer(), "reset");
+                    			}
                             }
 						}
 						current = PvPToggle.instance.players.get(other.getUniqueId());
@@ -100,8 +100,8 @@ public class PvPCommand implements CommandExecutor {
                                         if (PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
                                             Util.particleEffect(p.getPlayer());
                                         }
-//                            			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                            				Util.ChangeNametag(p.getPlayer(), "&c");                          			}
+                            			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                            				Util.ChangeNametag(p.getPlayer(), "&c");                          			}
                                     }
 								} else {
 								    if (Util.setPlayerState(p, true, p)) {
@@ -116,17 +116,17 @@ public class PvPCommand implements CommandExecutor {
                                     	if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
                                             Util.particleEffect(p.getPlayer());	
                                     	}
-//                            			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                            				Util.ChangeNametag(p.getPlayer(), "&c");
-//                            			}
+                            			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                            				Util.ChangeNametag(p.getPlayer(), "&c");
+                            			}
                                     }
                                 }
 							} else if(args[0].equalsIgnoreCase("off")) {
 							    if (Util.setPlayerState(p, true, p)) {
                                     Chat.send(p, "PVP_STATE_DISABLED");
-//                        			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                        				Util.ChangeNametag(p.getPlayer(), "reset");
-//                        			}
+                        			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                        				Util.ChangeNametag(p.getPlayer(), "reset");
+                        			}
                                 }
 							} else if(args[0].equalsIgnoreCase("status")) {
 								Chat.send(p, "PVP_STATUS", null, current);
@@ -162,9 +162,9 @@ public class PvPCommand implements CommandExecutor {
                                         if (PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
                                             Util.particleEffect(other.getPlayer());
                                         }
-//                            			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                            				Util.ChangeNametag(p.getPlayer(), "&c");
-//                            			}
+                            			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                            				Util.ChangeNametag(p.getPlayer(), "&c");
+                            			}
                                     }
 								} else {
 								    if (Util.setPlayerState(other, true, sender)) {
@@ -177,18 +177,18 @@ public class PvPCommand implements CommandExecutor {
                                     	if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.PARTICLES")) {
                                             Util.particleEffect(other.getPlayer());	
                                     	}
-//                            			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                            				Util.ChangeNametag(p.getPlayer(), "&c");	
-//                            			}
+                            			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                            				Util.ChangeNametag(p.getPlayer(), "&c");	
+                            			}
                                     }
                                     Chat.send(other, "PVP_STATE_ENABLED");
                                 }
 							} else if(args[0].equalsIgnoreCase("off")) {
 							    if (Util.setPlayerState(other, true, sender)) {
                                     Chat.send(other, "PVP_STATE_DISABLED");
-//                        			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
-//                        				Util.ChangeNametag(other.getPlayer(), "reset");
-//                        			}
+                        			if(PvPToggle.instance.getConfig().getBoolean("SETTINGS.NAMETAG")) {
+                        				Util.ChangeNametag(other.getPlayer(), "reset");
+                        			}
                                 }
 							}
 							current = PvPToggle.instance.players.get(other.getUniqueId());
