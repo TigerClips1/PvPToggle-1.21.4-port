@@ -12,11 +12,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
 import org.bukkit.entity.ThrownPotion;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.AreaEffectCloudApplyEvent;
-import org.bukkit.event.entity.EntityCombustByEntityEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.PotionSplashEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.event.weather.LightningStrikeEvent;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -27,8 +25,7 @@ import com.github.aasmus.pvptoggle.utils.Util;
 
 public class PvP implements Listener {
 
-	@EventHandler(ignoreCancelled = true)
-	//fired when an entity is hit
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)	//fired when an entity is hit
 	public void onHit(EntityDamageByEntityEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getEntity().getWorld().getName())) {
 			return;
@@ -38,18 +35,20 @@ public class PvP implements Listener {
 		if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
 			Player damager = (Player) event.getDamager(); //player who hit
 			Boolean damagerState = PvPToggle.instance.players.get(damager.getUniqueId());
+			if(damagerState == null) damagerState = false;
 			Player attacked = (Player) event.getEntity(); //player who was hit
 			Boolean attackedState = PvPToggle.instance.players.get(attacked.getUniqueId());
-			if (damagerState) { 
-				event.setCancelled(true);
-				Chat.send(damager, "PVP_DISABLED");
-			} else if (attackedState != null && attackedState) {
-				event.setCancelled(true);
-				Chat.send(damager, "PVP_DISABLED_OTHERS", attacked.getDisplayName());
-			} else {
-				Util.setCooldownTime(damager);
-				Util.setCooldownTime(attacked);
-			}
+			if(damagerState == null) damagerState = false;
+				if (damagerState) {
+					event.setCancelled(true);
+					Chat.send(damager, "PVP_DISABLED");
+				} else if (attackedState != null && attackedState) {
+					event.setCancelled(true);
+					Chat.send(damager, "PVP_DISABLED_OTHERS", attacked.getDisplayName());
+				} else {
+					Util.setCooldownTime(damager);
+					Util.setCooldownTime(attacked);
+				}
 		//checks if damage was done by a projectile
 		} else if (event.getDamager() instanceof Projectile) {
 			Projectile arrow = (Projectile) event.getDamager();
@@ -110,8 +109,37 @@ public class PvP implements Listener {
 			}
 		}
 	}
-	
-	@EventHandler(ignoreCancelled = true)
+
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
+	//fired when a lingering potion is thrown
+	public void onLingeringPotionSplash(LingeringPotionSplashEvent event) {
+		for(String world : PvPToggle.blockedWorlds) {
+			if(event.getEntity().getWorld().getName().equals(world)) {
+				return;
+			}
+		}
+
+		if(event.getEntity().getShooter() instanceof Player) {
+			if(event.getHitEntity() instanceof Player) {
+				Player damager = (Player) event.getEntity().getShooter();
+				Boolean damagerState = PvPToggle.instance.players.get(damager.getUniqueId());
+				Player attacked = (Player) event.getHitEntity();
+				Boolean attackedState = PvPToggle.instance.players.get(attacked.getUniqueId());
+				if(damagerState) {
+					event.setCancelled(true);
+					Chat.send(damager, "PVP_DISABLED");
+				} else if(attackedState != null && attackedState) {
+					event.setCancelled(true);
+					Chat.send(damager, "PVP_DISABLED_OTHERS", attacked.getDisplayName());
+				} else {
+					Util.setCooldownTime(damager);
+					Util.setCooldownTime(attacked);
+				}
+			}
+		}
+	}
+
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	//fired when a player is shot with a flaming arrow
 	public void onFlameArrow(EntityCombustByEntityEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getEntity().getWorld().getName())) {
@@ -136,8 +164,8 @@ public class PvP implements Listener {
 			}
 		}
 	}
-	
-	@EventHandler(ignoreCancelled = true)
+
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	//fired when a splash potion is thrown
 	public void onPotionSplash(PotionSplashEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getEntity().getWorld().getName())) {
@@ -177,8 +205,8 @@ public class PvP implements Listener {
 			   }
 		}
 	}
-	
-    @EventHandler(ignoreCancelled = true)
+
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     //fired when lingering potion cloud is active
     public void onCloudEffects(AreaEffectCloudApplyEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getEntity().getWorld().getName())) {
@@ -206,8 +234,8 @@ public class PvP implements Listener {
         	}
     	}
     }
-    
-    @EventHandler(ignoreCancelled = true)
+
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
     //fired when a player uses a fishing rod
     public void onPlayerFishing (PlayerFishEvent event) {
 		if (PvPToggle.blockedWorlds.contains(event.getPlayer().getWorld().getName())) {
@@ -235,7 +263,7 @@ public class PvP implements Listener {
     }
     
     //Tag lightning strike as from a trident
-	@EventHandler(ignoreCancelled = true)
+	@EventHandler(priority = EventPriority.LOW, ignoreCancelled = true)
 	public void onLightningStrike(LightningStrikeEvent event){
 		if(event.getCause() == LightningStrikeEvent.Cause.TRIDENT){
 			event.getLightning().setMetadata("TRIDENT", new FixedMetadataValue(PvPToggle.instance, event.getLightning().getLocation()));
